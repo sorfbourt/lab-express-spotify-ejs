@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 
   app.get('/artist-search', (req, res) => {
     const artistQuery = req.query.searchTerm
-    console.log(artistQuery)
+    //console.log(artistQuery)
 
 
 
@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
   .then(data => {
     const searchResults = data.body.artists.items
     //console.log('The received data from the API: ', searchResults)
-    // ----> 'HERE WHAT WE WANT TO DO AFTER RECEIVING THE DATA FROM THE API'
+
     res.render('artist-search-results', {searchResults})
 })
 .catch(err => console.log('The error while searching artists occurred: ', err))
@@ -67,12 +67,18 @@ app.get('/albums', (req, res) => {
 
 
   app.get('/albums/:artistId', async (req, res, next) => {
-    // .getArtistAlbums() code goes here
-    const artistId = req.params.artistId
 
-   const artistsAlbums = await spotifyApi.getArtistAlbums(artistId)
-   .then(()=>{
-    console.log("HELLO", artistId)
+    const artistId = req.params.artistId
+    const artistsAlbums = await spotifyApi.getArtistAlbums(artistId)
+
+    .then((data)=>{
+        const artistAlbums = data.body.items
+        console.log(console.log("ARTISTS ALBUMS", artistAlbums))
+
+
+
+    res.render('albums', {artistAlbums})
+
    })
    .catch(err => console.log('The error while searching albums occurred: ', err))
   })
