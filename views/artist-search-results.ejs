@@ -1,0 +1,16 @@
+<h1>Artist Search Results</h1>
+
+<% searchResults.forEach((artist) =>{%>
+
+    <p style="font-weight:bold"><%- artist.name %></p>
+    
+    <% if(artist.images.length > 0) {%>
+        <a href="<%- artist.href %>">
+        <img src="<%- artist.images[0].url %>" width="100"/></a>
+        <%}%>
+    <br/>
+    <a href="/albums/<%- artist.id %>">View Albums</a>
+    <br/><br/>
+
+
+    <%}) %>
