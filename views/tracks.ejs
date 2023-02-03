@@ -1,0 +1,19 @@
+<h1>Tracks Search Results</h1>
+
+<% tracks.forEach(track => { %>
+<b> <%- track.name %> </b>
+ <br/>
+
+<audio 
+controls
+src="<%- track.preview_url %>">
+    <a href="<%- track.preview_url %>">
+        Download audio
+    </a>
+</audio>
+
+
+
+
+<br/><br/>
+<% }) %>

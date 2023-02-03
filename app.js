@@ -73,11 +73,30 @@ app.get('/albums', (req, res) => {
 
     .then((data)=>{
         const artistAlbums = data.body.items
-        console.log(console.log("ARTISTS ALBUMS", artistAlbums))
+        //console.log(console.log("ARTISTS ALBUMS", artistAlbums))
 
 
 
     res.render('albums', {artistAlbums})
+
+   })
+   .catch(err => console.log('The error while searching albums occurred: ', err))
+  })
+
+
+
+  app.get('/tracks/:albumId', async (req, res, next) => {
+
+    const albumId = req.params.albumId
+    const tracks = await spotifyApi.getAlbumTracks(albumId)
+
+    .then((data)=>{
+        const tracks = data.body.items
+        console.log("TRACKS", tracks)
+
+
+
+    res.render('tracks', {tracks})
 
    })
    .catch(err => console.log('The error while searching albums occurred: ', err))
